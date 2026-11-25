@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.venv/
+build/
+dist/
+runs/
+data/
+*.npz
+*.npy
+*.ckpt
+*.pt
+!examples/weights/joint_d4_smoke.pt

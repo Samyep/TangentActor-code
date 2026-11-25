@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use Tangent-Actor in research, please cite the accompanying manuscript."
+type: software
+title: Tangent-Actor
+authors:
+  - name: Tangent-Actor contributors
+version: 0.1.0rc1
+repository-code: "https://github.com/Samyep/TangentActor-code"
+license: MIT
+preferred-citation:
+  type: unpublished
+  title: "Tangent-Actor: Learning to Linearize High-Dimensional Semilinear PDEs"
+  authors:
+    - family-names: Wang
+      given-names: Yeping
+  year: 2026

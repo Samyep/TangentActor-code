@@ -1,0 +1,17 @@
+equation,dimension,method,rmse_mean,rmse_sample_std,replicate_unit,replicates
+Radial Log-Terminal HJB,100,Tangent-Actor (Full),8.68e-04,5.63e-05,training seed,3
+Concave Cubic–Quadratic,100,Tangent-Actor (Full),3.42e-04,9.78e-06,training seed,3
+Convex Cubic–Quadratic,100,Tangent-Actor (Full),2.23e-04,5.02e-06,training seed,3
+Oscillatory Value–Gradient,100,Tangent-Actor (Full),8.58e-04,4.67e-05,training seed,3
+Radial Log-Terminal HJB,100,w/o MCV,3.04e-03,5.58e-05,training seed,3
+Concave Cubic–Quadratic,100,w/o MCV,1.85e-03,1.51e-05,training seed,3
+Convex Cubic–Quadratic,100,w/o MCV,1.56e-03,7.41e-05,training seed,3
+Oscillatory Value–Gradient,100,w/o MCV,1.93e-03,4.86e-05,training seed,3
+Radial Log-Terminal HJB,100,w/o Terminal Anchoring,1.01e-03,9.35e-05,training seed,3
+Concave Cubic–Quadratic,100,w/o Terminal Anchoring,3.56e-04,1.10e-05,training seed,3
+Convex Cubic–Quadratic,100,w/o Terminal Anchoring,2.34e-04,7.93e-06,training seed,3
+Oscillatory Value–Gradient,100,w/o Terminal Anchoring,9.01e-04,7.22e-05,training seed,3
+Radial Log-Terminal HJB,100,w/o Tangent Updates,2.75e-03,3.35e-05,inference replicate,2
+Concave Cubic–Quadratic,100,w/o Tangent Updates,3.35e-03,2.38e-05,inference replicate,2
+Convex Cubic–Quadratic,100,w/o Tangent Updates,5.14e-03,1.64e-05,inference replicate,2
+Oscillatory Value–Gradient,100,w/o Tangent Updates,6.44e-03,1.56e-06,inference replicate,2

@@ -1,0 +1,315 @@
+% Aggregate tables as typeset in the manuscript.
+
+\begin{table}[!ht]
+\centering
+\caption{Full-History MLP depth--sampling sweep across 30
+configuration--dimension cells. Each configuration has value RMSE above
+RelMAE; best values are bolded. Every cell uses 512 independent raw
+recursions.}
+\label{tab:hn_fhmlp_budget_depth_sweep}
+\vspace{2pt}
+{\fontsize{7.3}{8.6}\selectfont
+\setlength{\tabcolsep}{1.8pt}
+\renewcommand{\arraystretch}{1.10}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{@{}l!{\color{CellDivider}\vrule width 0.35pt}c!{\color{CellDivider}\vrule width 0.35pt}c!{\color{CellDivider}\vrule width 0.35pt}c!{\color{CellDivider}\vrule width 0.35pt}c!{\color{CellDivider}\vrule width 0.35pt}c!{\color{CellDivider}\vrule width 0.35pt}c@{}}
+\toprule
+\textbf{Configuration} & \multicolumn{6}{c}{\textbf{Ambient dimension $d$}} \\
+\cmidrule(lr){2-7}
+\textbf{$(n,M)$} & $20$ & $50$ & $100$ & $200$ & $400$ & $1000$ \\
+\midrule
+\multirow{2}{*}{$(3,8)$}
+ & 2.84e0 & 7.27e0 & 1.47e1 & 2.95e1 & 5.92e1 & 1.48e2 \\
+ & 3.52e0 & 9.02e0 & 1.82e1 & 3.66e1 & 7.34e1 & 1.84e2 \\
+\cmidrule(lr){1-7}
+\multirow{2}{*}{$(3,16)$}
+ & 1.41e0 & 3.64e0 & 7.34e0 & 1.48e1 & 2.96e1 & 7.42e1 \\
+ & 1.76e0 & 4.54e0 & 9.16e0 & 1.84e1 & 3.69e1 & 9.25e1 \\
+\cmidrule(lr){1-7}
+\multirow{2}{*}{$(3,24)$}
+ & \textbf{9.36e-1} & \textbf{2.41e0} & \textbf{4.84e0} & \textbf{9.73e0} & \textbf{1.95e1} & \textbf{4.89e1} \\
+ & \textbf{1.17e0} & \textbf{3.01e0} & \textbf{6.05e0} & \textbf{1.22e1} & \textbf{2.44e1} & \textbf{6.10e1} \\
+\cmidrule(lr){1-7}
+\multirow{2}{*}{$(4,8)$}
+ & 3.41e0 & 1.62e1 & 5.11e1 & 1.56e2 & 4.64e2 & 1.91e3 \\
+ & 4.22e0 & 2.01e1 & 6.34e1 & 1.93e2 & 5.75e2 & 2.37e3 \\
+\cmidrule(lr){1-7}
+\multirow{2}{*}{$(5,8)$}
+ & 2.76e0 & 2.71e1 & 1.48e2 & 7.25e2 & 3.29e3 & 2.28e4 \\
+ & 3.41e0 & 3.35e1 & 1.83e2 & 8.95e2 & 4.06e3 & 2.81e4 \\
+\bottomrule
+\end{tabular}
+}
+}
+\end{table}
+
+\begin{table*}[!t]
+\centering
+\caption{Whole-function value RMSE of the frozen direct Tangent-Actor
+value head across three PDEs and five dimensions (60 method cells).
+Comparisons within each PDE--dimension cell use the same frozen state bank;
+best values are bolded and second-best values are underlined. The final
+FK--MCV estimator is intentionally excluded
+because this table isolates the accuracy of the learned value head itself.}
+\label{tab:direct_value_head_three_pdes}
+\vspace{2pt}
+{\fontsize{6.8}{8.0}\selectfont
+\setlength{\tabcolsep}{0.95pt}
+\renewcommand{\arraystretch}{1.10}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{}l
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\hspace{5pt}\color{PDEdivider}\vrule width 0.75pt\hspace{5pt}}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\hspace{5pt}\color{PDEdivider}\vrule width 0.75pt\hspace{5pt}}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c@{}}
+\toprule
+\textbf{Method}
+& \multicolumn{5}{c!{\hspace{5pt}\color{PDEdivider}\vrule width 0.75pt\hspace{5pt}}}{\textbf{Concave Cubic--Quadratic PDE}}
+& \multicolumn{5}{c!{\hspace{5pt}\color{PDEdivider}\vrule width 0.75pt\hspace{5pt}}}{\textbf{Convex Cubic--Quadratic PDE}}
+& \multicolumn{5}{c}{\textbf{Fourier--Tanh Coupled PDE}} \\
+\cmidrule(lr){2-6}\cmidrule(lr){7-11}\cmidrule(lr){12-16}
+\textbf{Dimension}
+& $20$ & $50$ & $100$ & $200$ & $400$
+& $20$ & $50$ & $100$ & $200$ & $400$
+& $20$ & $50$ & $100$ & $200$ & $400$ \\
+\midrule
+\rowcolor{TAblue}
+Direct value head
+& \underline{9.86e-4} & \underline{1.18e-3} & \underline{2.36e-3} & \underline{3.11e-3} & \underline{5.29e-3}
+& \textbf{5.79e-4} & \underline{1.23e-3} & \underline{1.97e-3} & \underline{4.13e-3} & 7.59e-3
+& \textbf{7.12e-3} & \textbf{1.47e-2} & \textbf{1.18e-2} & \textbf{4.29e-2} & \textbf{5.98e-2} \\
+\cmidrule(lr){1-16}
+DPI
+& \textbf{8.81e-4} & \textbf{9.67e-4} & \textbf{2.14e-3} & \textbf{2.76e-3} & 6.82e-3
+& \underline{7.28e-4} & \textbf{9.71e-4} & \textbf{1.86e-3} & \textbf{2.93e-3} & \textbf{4.09e-3}
+& 2.06e-2 & 6.25e-2 & \underline{6.46e-2} & 2.46e-1 & 3.90e-1 \\
+\cmidrule(lr){1-16}
+PINN-HTE
+& 3.83e-3 & 2.80e-3 & 3.23e-3 & 3.43e-3 & \textbf{5.26e-3}
+& 1.62e-3 & 2.68e-3 & 3.27e-3 & 4.60e-3 & \underline{5.06e-3}
+& 4.90e-2 & 6.55e-2 & 7.71e-2 & 2.62e-1 & 4.01e-1 \\
+\cmidrule(lr){1-16}
+SDGD-PINN
+& 2.59e-2 & 1.80e-2 & 2.33e-2 & 2.79e-2 & 2.97e-2
+& 1.33e-2 & 1.50e-2 & 1.28e-2 & 1.68e-2 & 1.38e-2
+& \underline{1.35e-2} & \underline{5.13e-2} & 7.41e-2 & \underline{2.09e-1} & \underline{2.33e-1} \\
+\bottomrule
+\end{tabular}
+}
+}
+\end{table*}
+
+\begin{table}[!ht]
+\centering
+\caption{Single-point value accuracy for the Joint Nonseparable PDE.
+Each method has RMSE above RelMAE. The direct value head is the
+deterministic output of the formally selected seed-0 Actor on the same
+32-state frozen query bank. Best valid values are bolded. NF denotes
+numerical failure of Deep BSDE in the frozen configuration.}
+\label{tab:joint_nonseparable_value_head}
+\vspace{2pt}
+{\fontsize{7.3}{8.6}\selectfont
+\setlength{\tabcolsep}{1.8pt}
+\renewcommand{\arraystretch}{1.10}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{
+@{}l
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c
+!{\color{CellDivider}\vrule width 0.35pt}c@{}
+}
+\toprule
+\textbf{Method}
+& \multicolumn{5}{c}{\textbf{Ambient dimension $d$}} \\
+\cmidrule(lr){2-6}
+& $20$ & $50$ & $100$ & $200$ & $400$ \\
+\midrule
+
+\rowcolor{TAblue!40}
+& 2.46e-3 & 2.97e-3 & 3.52e-3 & 6.69e-3 & 1.28e-2 \\
+\rowcolor{TAblue!40}
+\multirow{-2}{*}{Direct value head}
+& 3.61e-3 & 3.55e-3 & 3.83e-3 & 8.28e-3 & 1.57e-2 \\
+
+\cmidrule(lr){1-6}
+
+\rowcolor{TAblue}
+& \textbf{1.18e-3} & \textbf{1.06e-3} & \textbf{1.04e-3}
+& \textbf{1.22e-3} & \textbf{1.24e-3} \\
+\rowcolor{TAblue}
+\multirow{-2}{*}{Full TA (FK--MCV)}
+& \textbf{1.68e-3} & \textbf{1.54e-3} & \textbf{1.49e-3}
+& \textbf{1.70e-3} & \textbf{1.77e-3} \\
+
+\cmidrule(lr){1-6}
+
+& 1.14e-2 & 2.56e-2 & 5.15e-2 & 1.02e-1 & 2.13e-1 \\
+\multirow{-2}{*}{FH-MLP}
+& 1.46e-2 & 3.44e-2 & 7.39e-2 & 1.41e-1 & 3.00e-1 \\
+
+\cmidrule(lr){1-6}
+
+& 2.59e-3 & 3.76e-3 & 3.48e-2 & \textit{NF} & \textit{NF} \\
+\multirow{-2}{*}{Deep BSDE}
+& 3.35e-3 & 4.46e-3 & 1.77e-2 & \textit{NF} & \textit{NF} \\
+
+\bottomrule
+\end{tabular}
+}
+}
+\end{table}
+
+\begin{table*}[t]
+\centering
+\caption{Baseline accuracy under increased computational budgets on two 100D PDEs.
+Each cell reports $10^3\times$RMSE (mean $\pm$ seed SD); the second line gives
+varied hyperparameter / training time (min). C0: iteration budget;
+C1: stochastic-estimation budget; C2: optimization, sampling, or discretization budget.}
+\label{tab:baseline_budget_sensitivity}
+\vspace{2pt}
+\begingroup
+\definecolor{BudgetDivider}{RGB}{190,199,210}
+\definecolor{BudgetPDEDivider}{RGB}{128,142,156}
+\fontsize{7.6}{8.9}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.04}
+\newcommand{\BudgetCell}[3]{
+  \shortstack[c]{$#1$\\[-1pt]
+  {\fontsize{6.7}{7.2}\selectfont $#2\,/\,#3$}}}
+\begin{tabular*}{\textwidth}{@
+  {\extracolsep{\fill}}ll
+  c!{\color{BudgetDivider}\vrule width .28pt}c!{\color{BudgetDivider}\vrule width .28pt}c
+  !{\color{BudgetPDEDivider}\vrule width .5pt}
+  c!{\color{BudgetDivider}\vrule width .28pt}c!{\color{BudgetDivider}\vrule width .28pt}c
+  @{} }
+\toprule
+ & & \multicolumn{3}{c}{\textbf{Full-Rank Log-Sum-Exp HJB}}
+     & \multicolumn{3}{c}{\textbf{Fourier--Tanh Coupled PDE}} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+\textbf{Axis} & \textbf{Method} & \textbf{L1} & \textbf{L2} & \textbf{L3}
+ & \textbf{L1} & \textbf{L2} & \textbf{L3} \\
+\midrule
+\multirow{3}{*}{\textbf{C0}} & DPI & \BudgetCell{137.4\pm12.9}{80}{6.2} & \BudgetCell{148.9\pm65.8}{160}{13.1} & \BudgetCell{184.3\pm67.9}{320}{24.4} & \BudgetCell{110.8\pm33.3}{80}{4.7} & \BudgetCell{99.4\pm61.1}{160}{9.3} & \BudgetCell{63.2\pm14.6}{320}{18.5} \\
+\cmidrule(lr){2-8}
+ & PINN--HTE & \BudgetCell{217.9\pm54.3}{30\mathrm{k}}{3.3} & \BudgetCell{120.0\pm21.8}{60\mathrm{k}}{6.6} & \BudgetCell{186.2\pm52.4}{120\mathrm{k}}{13.2} & \BudgetCell{70.3\pm9.5}{30\mathrm{k}}{3.4} & \BudgetCell{77.3\pm13.4}{60\mathrm{k}}{6.7} & \BudgetCell{87.7\pm8.6}{120\mathrm{k}}{13.5} \\
+\cmidrule(lr){2-8}
+ & Deep BSDE & \BudgetCell{164.8\pm0.9}{1\mathrm{k}}{21.5} & \BudgetCell{160.1\pm1.0}{2\mathrm{k}}{43.0} & \BudgetCell{144.7\pm0.6}{4\mathrm{k}}{85.8} & \BudgetCell{76.7\pm3.3}{1\mathrm{k}}{22.6} & \BudgetCell{74.1\pm0.8}{2\mathrm{k}}{45.1} & \BudgetCell{59.5\pm1.4}{4\mathrm{k}}{89.9} \\
+\midrule
+\multirow{3}{*}{\textbf{C1}} & DPI & \BudgetCell{161.6\pm39.6}{512}{5.1} & \BudgetCell{143.9\pm16.6}{16{,}384}{7.6} & \BudgetCell{132.8\pm25.9}{32{,}768}{10.9} & \BudgetCell{76.7\pm3.8}{512}{4.1} & \BudgetCell{93.7\pm30.2}{16{,}384}{8.2} & \BudgetCell{115.2\pm61.1}{32{,}768}{8.6} \\
+\cmidrule(lr){2-8}
+ & PINN--HTE & \BudgetCell{155.9\pm88.2}{64}{7.1} & \BudgetCell{205.9\pm147.9}{128}{8.6} & \BudgetCell{199.6\pm18.1}{256}{26.6} & \BudgetCell{103.5\pm38.0}{4}{3.4} & \BudgetCell{87.5\pm11.3}{64}{7.3} & \BudgetCell{76.9\pm5.4}{128}{8.6} \\
+\cmidrule(lr){2-8}
+ & Deep BSDE & \BudgetCell{161.2\pm1.5}{32}{42.2} & \BudgetCell{160.1\pm1.0}{64}{43.0} & \BudgetCell{158.1\pm0.3}{128}{45.9} & \BudgetCell{74.6\pm1.9}{32}{44.5} & \BudgetCell{74.1\pm0.8}{64}{45.1} & \BudgetCell{66.9\pm0.8}{128}{44.3} \\
+\midrule
+\multirow{3}{*}{\textbf{C2}} & DPI & \BudgetCell{142.7\pm18.0}{4}{3.3} & \BudgetCell{155.3\pm4.9}{32}{6.2} & \BudgetCell{108.2\pm20.9}{64}{9.6} & \BudgetCell{110.8\pm33.3}{16}{5.0} & \BudgetCell{97.4\pm23.7}{64}{9.4} & \BudgetCell{63.9\pm8.8}{128}{16.2} \\
+\cmidrule(lr){2-8}
+ & PINN--HTE & \BudgetCell{217.9\pm54.3}{512}{3.4} & \BudgetCell{123.3\pm46.7}{2{,}048}{12.8} & \BudgetCell{136.1\pm28.4}{4{,}096}{25.6} & \BudgetCell{93.7\pm20.1}{256}{3.3} & \BudgetCell{77.9\pm19.7}{2{,}048}{13.4} & \BudgetCell{68.1\pm10.3}{4{,}096}{25.8} \\
+\cmidrule(lr){2-8}
+ & Deep BSDE & \BudgetCell{147.1\pm0.7}{10}{22.1} & \BudgetCell{160.1\pm1.0}{20}{43.0} & \BudgetCell{167.1\pm0.8}{40}{81.9} & \BudgetCell{65.0\pm1.6}{10}{23.2} & \BudgetCell{74.1\pm0.8}{20}{45.1} & \BudgetCell{76.7\pm2.9}{40}{88.2} \\
+\bottomrule
+\end{tabular*}
+\endgroup
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Absolute whole-function value RMSE underlying the component-ablation
+figure at $d=100$. Values are mean $\pm$ sample standard deviation. The
+$\dagger$ entries summarize two independent inference replicates rather than
+training seeds.}
+\label{tab:component-ablation-raw}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lcccccc}
+\toprule
+& & \multicolumn{3}{c}{MCV ablations} & & \\
+\cmidrule(lr){3-5}
+PDE & Full TA & w/o infer. & w/o train. & w/o all
+& w/o terminal anchoring & w/o tangent updates$^{\dagger}$ \\
+\midrule
+Radial Log-Terminal HJB
+& $\mathbf{8.68\mathrm{e}{-4} \pm 5.63\mathrm{e}{-5}}$
+& $3.03\mathrm{e}{-3} \pm 4.75\mathrm{e}{-5}$
+& $8.85\mathrm{e}{-4} \pm 5.20\mathrm{e}{-5}$
+& $3.04\mathrm{e}{-3} \pm 5.58\mathrm{e}{-5}$
+& $1.01\mathrm{e}{-3} \pm 9.35\mathrm{e}{-5}$
+& $2.75\mathrm{e}{-3} \pm 3.35\mathrm{e}{-5}$ \\
+Concave Cubic--Quadratic
+& $\mathbf{3.42\mathrm{e}{-4} \pm 9.78\mathrm{e}{-6}}$
+& $1.85\mathrm{e}{-3} \pm 1.48\mathrm{e}{-5}$
+& $3.56\mathrm{e}{-4} \pm 9.59\mathrm{e}{-6}$
+& $1.85\mathrm{e}{-3} \pm 1.51\mathrm{e}{-5}$
+& $3.56\mathrm{e}{-4} \pm 1.10\mathrm{e}{-5}$
+& $3.35\mathrm{e}{-3} \pm 2.38\mathrm{e}{-5}$ \\
+Convex Cubic--Quadratic
+& $\mathbf{2.23\mathrm{e}{-4} \pm 5.02\mathrm{e}{-6}}$
+& $1.56\mathrm{e}{-3} \pm 7.53\mathrm{e}{-5}$
+& $2.30\mathrm{e}{-4} \pm 5.24\mathrm{e}{-6}$
+& $1.56\mathrm{e}{-3} \pm 7.41\mathrm{e}{-5}$
+& $2.34\mathrm{e}{-4} \pm 7.93\mathrm{e}{-6}$
+& $5.14\mathrm{e}{-3} \pm 1.64\mathrm{e}{-5}$ \\
+Oscillatory Value--Gradient
+& $\mathbf{8.58\mathrm{e}{-4} \pm 4.67\mathrm{e}{-5}}$
+& $1.91\mathrm{e}{-3} \pm 5.21\mathrm{e}{-5}$
+& $8.96\mathrm{e}{-4} \pm 3.70\mathrm{e}{-5}$
+& $1.93\mathrm{e}{-3} \pm 4.86\mathrm{e}{-5}$
+& $9.01\mathrm{e}{-4} \pm 7.22\mathrm{e}{-5}$
+& $6.44\mathrm{e}{-3} \pm 1.56\mathrm{e}{-6}$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Absolute whole-function value RMSE along the Tangent-Actor iteration
+trajectory at $d=100$.  Values are mean $\pm$ sample standard deviation over
+the three paired seed-indexed evaluations.}
+\label{tab:tangent-update-raw}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccc}
+\toprule
+& Initial tangent & \multicolumn{4}{c}{Learned tangent updates} \\
+\cmidrule(lr){3-6}
+PDE & $A_0$ & $A_1$ & $A_2$ & $A_3$ & $A_4$ \\
+\midrule
+Radial Log-Terminal HJB
+& $2.717\mathrm{e}{-3} \pm 1.543\mathrm{e}{-5}$
+& $1.539\mathrm{e}{-3} \pm 1.311\mathrm{e}{-4}$
+& $1.093\mathrm{e}{-3} \pm 4.434\mathrm{e}{-5}$
+& $9.822\mathrm{e}{-4} \pm 9.366\mathrm{e}{-5}$
+& $\mathbf{8.677\mathrm{e}{-4} \pm 5.630\mathrm{e}{-5}}$ \\
+Concave Cubic--Quadratic
+& $3.340\mathrm{e}{-3} \pm 2.268\mathrm{e}{-5}$
+& $3.633\mathrm{e}{-4} \pm 1.192\mathrm{e}{-5}$
+& $3.463\mathrm{e}{-4} \pm 1.037\mathrm{e}{-5}$
+& $3.423\mathrm{e}{-4} \pm 8.804\mathrm{e}{-6}$
+& $\mathbf{3.417\mathrm{e}{-4} \pm 9.862\mathrm{e}{-6}}$ \\
+Convex Cubic--Quadratic
+& $5.147\mathrm{e}{-3} \pm 1.521\mathrm{e}{-5}$
+& $2.387\mathrm{e}{-4} \pm 4.012\mathrm{e}{-6}$
+& $2.262\mathrm{e}{-4} \pm 3.208\mathrm{e}{-6}$
+& $2.240\mathrm{e}{-4} \pm 3.513\mathrm{e}{-6}$
+& $\mathbf{2.232\mathrm{e}{-4} \pm 5.019\mathrm{e}{-6}}$ \\
+Oscillatory Value--Gradient
+& $6.424\mathrm{e}{-3} \pm 3.150\mathrm{e}{-5}$
+& $1.642\mathrm{e}{-3} \pm 9.988\mathrm{e}{-5}$
+& $9.878\mathrm{e}{-4} \pm 1.614\mathrm{e}{-4}$
+& $8.848\mathrm{e}{-4} \pm 4.874\mathrm{e}{-5}$
+& $\mathbf{8.579\mathrm{e}{-4} \pm 4.671\mathrm{e}{-5}}$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

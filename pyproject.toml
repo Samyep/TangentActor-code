@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tangent-actor"
+version = "0.1.0rc1"
+description = "Terminal-aware tangent Feynman-Kac actors for semilinear PDEs"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["numpy>=1.24", "torch>=2.1", "scipy>=1.10"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+tangent-actor = "tangent_actor.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["tangent_actor*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
