@@ -32,7 +32,43 @@ python -m pytest -q
 
 The [example checkpoint](examples/weights/joint_d4_smoke.pt) is a small 4D coupled nonconvex actor from the CPU training example. The evaluation command loads it and samples new states. To use your own test bank, substitute `--bank /path/to/your_bank.npz`. The file must contain `t` with shape `(n,)` and `x` with shape `(n, dimension)`.
 
-The training examples write checkpoints, predictions and diagnostics to new local directories under `runs/`. See [configuration and input formats](configs/) for custom runs, including OU/GMM and B6, and [algorithm interfaces](docs/ALGORITHM_AND_INTERFACES.md) to extend the method. The public high-dimensional examples use demonstration coefficients. The paper tables report historical evaluations.
+## Train Tangent-Actor
+
+From the repository root, train a 4D actor for the coupled nonconvex PDE on CPU. This configuration samples its own training and validation states.
+
+```bash
+python -m tangent_actor --config configs/smoke_joint.json --output runs/joint_4d --device cpu
+```
+
+Choose a new output directory for each run. Use `runs/joint_4d/actor.pt` for inference. It contains the actor selected by the run and the configuration needed to rebuild it. The same directory holds the per-update checkpoints (`actor_a1.pt`, `actor_a2.pt`), selection diagnostics (`summary.json`), and local evaluation states and predictions (`evaluation.npz`).
+
+For a larger run, choose a `paper_*.json` configuration and a fresh output path. To change the training budget, edit `training_points`, `paths_per_label`, or `optimizer_steps` in a copy of the configuration. On a machine with CUDA-enabled PyTorch, use `--device cuda`. OU/GMM and B6 require local equation inputs. The public high-dimensional examples use demonstration coefficients, and the paper tables report historical evaluations. See [configurations and input formats](configs/) and [algorithm interfaces](docs/ALGORITHM_AND_INTERFACES.md).
+
+## Deploy Tangent-Actor
+
+On the target machine, check out the same code revision used for training. Create a `models/` directory under the checkout and copy the selected checkpoint there as `models/actor.pt`. For OU/GMM or B6, also copy the equation inputs used for training and set `TANGENT_ACTOR_DATA_DIR` to their directory.
+
+From the repository root, install the package and check that the actor produces finite estimates on eight sampled states. The JSON output should report `"finite": true`.
+
+```bash
+python -m pip install .
+python examples/evaluate_checkpoint.py --checkpoint models/actor.pt --sample-states 8
+```
+
+In a Python application, load the actor once and reuse it across batches. This example estimates the solution at time zero and the spatial origin.
+
+```python
+import numpy as np
+from tangent_actor import evaluate, load_checkpoint
+
+problem, actor, _ = load_checkpoint("models/actor.pt", device="cpu")
+t = np.array([0.0])
+x = np.zeros((1, problem.d))
+values, _ = evaluate(problem, actor, t, x, paths=16, time_steps=8, path_chunk=4)
+print(values["mcv"])
+```
+
+For your own queries, pass times with shape `(n,)` and states with shape `(n, problem.d)`. Each entry of `values["mcv"]` estimates the PDE solution at the corresponding time and state using the martingale control variate. Adjust `paths` and `time_steps` to set the inference budget. Use at least four paths and choose an even `path_chunk` that divides `paths`.
 
 ## Contributors
 
