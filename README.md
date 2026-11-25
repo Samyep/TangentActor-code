@@ -34,6 +34,10 @@ The [example checkpoint](examples/weights/joint_d4_smoke.pt) is a small 4D coupl
 
 The training examples write checkpoints, predictions and diagnostics to new local directories under `runs/`. See [configuration and input formats](configs/) for custom runs, including OU/GMM and B6, and [algorithm interfaces](docs/ALGORITHM_AND_INTERFACES.md) to extend the method. The public high-dimensional examples use demonstration coefficients. The paper tables report historical evaluations.
 
+## Contributors
+
+- Yeping Wang ([@Samyep](https://github.com/Samyep))
+
 ## Citation and licenses
 
 If you use the code in research, please cite Yeping Wang, *Tangent-Actor: Learning to Linearize High-Dimensional Semilinear PDEs* (2026 manuscript). [Citation metadata](CITATION.cff).
