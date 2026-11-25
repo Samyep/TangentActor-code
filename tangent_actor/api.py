@@ -12,6 +12,7 @@ import torch
 
 from .ambient import TerminalAwareActor
 from .benchmarks import HJBLogBenchmark, AllenCahnBenchmark, OUGMMBenchmark, MLPFailureBenchmark
+from .cosine_hjb import CosineHJBBenchmark
 from .drivers import JointConcaveDriver, JointConvexOriginalDriver, SignTransformedDriver
 from .sine_drivers import SineQuadraticDriver
 from . import feynman_kac as fk
@@ -19,7 +20,7 @@ from . import joint_models, joint_training, joint_mcv, joint_fk, joint_evaluatio
 from .low_rank import LearnedLowRankTerminalAwareActor, train_low_rank_actor
 from .utils import seed_everything
 
-PDES = ('hjb_log','ou_gmm','allen_cahn','joint_concave','joint_convex','nonconvex_coupled','mlp_failure','b6_fullrank','dense_fourier')
+PDES = ('hjb_log','ou_gmm','allen_cahn','joint_concave','joint_convex','nonconvex_coupled','mlp_failure','b6_fullrank','dense_fourier','cosine_hjb')
 
 
 def data_path(name: str) -> Path:
@@ -37,6 +38,7 @@ def data_path(name: str) -> Path:
 def make_problem(pde: str, dimension: int):
     d=int(dimension)
     if pde=='hjb_log': return HJBLogBenchmark(d)
+    if pde == 'cosine_hjb': return CosineHJBBenchmark(d)
     if pde=='allen_cahn': return AllenCahnBenchmark(d)
     if pde=='ou_gmm': return OUGMMBenchmark.from_npz(data_path(f'ou_gmm_d{d}.npz'))
     if pde=='mlp_failure': return MLPFailureBenchmark(d)

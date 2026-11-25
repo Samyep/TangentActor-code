@@ -11,7 +11,7 @@ def stable_seed(*parts: object) -> int:
 
 from .feynman_kac import generate_labels
 def _purpose(family: str) -> str:
-    return {"hjb_log": "function", "ou_gmm": "official", "allen_cahn": "native", "mlp_failure": "function", "b6_fullrank": "function"}[family]
+    return {"ou_gmm": "official", "allen_cahn": "native"}.get(family, "function")
 
 def _array_hash(*arrays: np.ndarray) -> str:
     digest = hashlib.sha256()

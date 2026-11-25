@@ -28,7 +28,7 @@ class CustomBenchmark(Benchmark):
     def sample_states(self, count, *, seed, purpose='function'): ...
 ```
 
-Methods take PyTorch tensors except `sample_states`, which returns NumPy time and state arrays. Missing terminal gradients can use the base autograd implementation. Diffusion `sigma` is scalar in this release. For value-only drivers `q` may be `None`. Instantiate `ambient.TerminalAwareActor` and call `feynman_kac.generate_labels`, `fit_actor`, and `evaluate_policy` directly for an external benchmark; the command-line factory enumerates the nine bundled PDEs.
+Methods take PyTorch tensors except `sample_states`, which returns NumPy time and state arrays. Missing terminal gradients can use the base autograd implementation. Diffusion `sigma` is scalar in this release. For value-only drivers `q` may be `None`. For the training CLI and portable checkpoints, register the class in `api.make_problem` as shown in [Use Tangent-Actor on your own PDE](../README.md#use-tangent-actor-on-your-own-pde). For direct kernel access, instantiate `ambient.TerminalAwareActor` and call `feynman_kac.generate_labels`, `fit_actor`, and `evaluate_policy`.
 
 ## Joint driver interface
 

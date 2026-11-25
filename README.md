@@ -70,9 +70,49 @@ print(values["mcv"])
 
 For your own queries, pass times with shape `(n,)` and states with shape `(n, problem.d)`. Each entry of `values["mcv"]` estimates the PDE solution at the corresponding time and state using the martingale control variate. Adjust `paths` and `time_steps` to set the inference budget. Use at least four paths and choose an even `path_chunk` that divides `paths`.
 
-## Contributors
+## Use Tangent-Actor on your own PDE
 
-- Yeping Wang ([@Samyep](https://github.com/Samyep))
+The runnable `cosine_hjb` example solves a terminal-value problem on $\mathbb{R}^2$. It has zero base drift, unit diffusion, and terminal time $T=0.5$.
+
+$$
+\partial_t u + \tfrac12 \Delta u + \sqrt{1+\lVert\nabla u\rVert^2}-1=0,
+\qquad u(T,x)=\tfrac12(\cos x_1+\cos x_2).
+$$
+
+### What to change for a new equation
+
+| Where | What to change |
+| --- | --- |
+| [Equation class](tangent_actor/cosine_hjb.py) | Copy `CosineHJBBenchmark`, give it a new `pde` identifier, and set `T` and the constant scalar diffusion `sigma`. Implement the terminal value `terminal(x)` and its spatial gradient `terminal_gradient(x)`. Override `base_drift(t, x)` for nonzero drift and `sample_states` to sample the region where you need predictions. The example inherits zero drift and standard normal spatial samples. |
+| [Driver and tangent coefficients](tangent_actor/cosine_hjb.py) | Write `driver(r, q)` with $r=u$ and $q=\sigma\nabla u$. For a smooth driver $f$, return $c=\partial_r f$, $b=\nabla_q f$, and $h=f-cr-b\cdot q$ from `tangent_coefficients`. In this example $c=0$ and $b=q/\sqrt{1+\lVert q\rVert^2}$. For a batch of $n$ states, `c` and `h` have shape `(n,)` and `b` has shape `(n, d)`. |
+| [Registration](tangent_actor/api.py) | Import the class, add its identifier to `PDES`, and add a branch in `make_problem(pde, dimension)` that returns your class for that identifier. Both training and checkpoint loading use this function. |
+| [Training configuration](configs/smoke_cosine_hjb.json) | Copy this JSON file, set `pde` to the registered identifier and `dimension` to the number of spatial coordinates. Start with the small CPU budget to check the full workflow. |
+
+Use `actor_kind = "gradient"` for a driver that depends only on $q$, as above, or `"value"` for one that depends only on $r$. A driver that depends on both uses the [joint value–gradient interface](docs/ALGORITHM_AND_INTERFACES.md#joint-driver-interface). The example uses a whole-space rollout with constant scalar diffusion. Spatial boundary conditions or a state-dependent diffusion require corresponding changes to that rollout.
+
+### Train the example and deploy it
+
+From the repository root, install the package and train into a new directory.
+
+```bash
+python -m pip install -e .
+python -m tangent_actor --config configs/smoke_cosine_hjb.json --output runs/cosine_2d --device cpu
+```
+
+On the target machine, install the same revision of your fork with `python -m pip install .` so it includes your equation and its registration. Copy `runs/cosine_2d/actor.pt` to `models/actor.pt`. The following application loads the trained actor, estimates the solution at an interior time, and checks a second query against the known terminal condition.
+
+```python
+import numpy as np
+from tangent_actor import evaluate, load_checkpoint
+
+problem, actor, _ = load_checkpoint("models/actor.pt", device="cpu")
+t = np.array([0.25, problem.T])
+x = np.array([[0.4, -0.2], [0.1, 0.3]])
+values, _ = evaluate(problem, actor, t, x, paths=16, time_steps=8, path_chunk=4)
+u = values["mcv"]
+print(u[0])
+np.testing.assert_allclose(u[1], np.cos(x[1]).mean(), atol=1e-6)
+```
 
 ## Citation and licenses
 
