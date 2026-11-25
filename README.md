@@ -42,7 +42,7 @@ python -m tangent_actor --config configs/smoke_joint.json --output runs/joint_4d
 
 Choose a new output directory for each run. Use `runs/joint_4d/actor.pt` for inference. It contains the actor selected by the run and the configuration needed to rebuild it. The same directory holds the per-update checkpoints (`actor_a1.pt`, `actor_a2.pt`), selection diagnostics (`summary.json`), and local evaluation states and predictions (`evaluation.npz`).
 
-For a larger run, choose a `paper_*.json` configuration and a fresh output path. To change the training budget, edit `training_points`, `paths_per_label`, or `optimizer_steps` in a copy of the configuration. On a machine with CUDA-enabled PyTorch, use `--device cuda`. OU/GMM and B6 require local equation inputs. The public high-dimensional examples use demonstration coefficients, and the paper tables report historical evaluations. See [configurations and input formats](configs/) and [algorithm interfaces](docs/ALGORITHM_AND_INTERFACES.md).
+For a larger run, choose a `paper_*.json` configuration and a fresh output path. To change the training budget, edit `training_points`, `paths_per_label`, or `optimizer_steps` in a copy of the configuration. On a machine with CUDA-enabled PyTorch, use `--device cuda`.
 
 ## Deploy Tangent-Actor
 
