@@ -46,7 +46,7 @@ For a larger run, choose a `paper_*.json` configuration and a fresh output path.
 
 ## Deploy Tangent-Actor
 
-On the target machine, check out the same code revision used for training. Create a `models/` directory under the checkout and copy the selected checkpoint there as `models/actor.pt`. For OU/GMM or B6, also copy the equation inputs used for training and set `TANGENT_ACTOR_DATA_DIR` to their directory.
+On the target machine, check out the same code revision used for training. Create a `models/` directory under the checkout and copy the selected checkpoint there as `models/actor.pt`.
 
 From the repository root, install the package and check that the actor produces finite estimates on eight sampled states. The JSON output should report `"finite": true`.
 
